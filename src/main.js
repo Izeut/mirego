@@ -37,11 +37,13 @@ function initApi() {
     request.open('GET', "https://api.neverworkaday.com/organizations/mirego/moments", true);
 
     request.onload = function () {
+        router.push("/");
         if (request.status === 200 && request.statusText === "OK") {
             console.log("API connected!");
             store.dispatch("setMoments", {
                 moments: JSON.parse(request.response)
             }).then(function (response) {
+                console.log(router);
                 setTimeout(function () {
                     router.push("momentsList");
                 }, 1000);
